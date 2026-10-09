@@ -72,7 +72,7 @@ t.test(results, conf.level = 0.95)
 ```
 After conducting 200 Monte Carlo simulations with 28 students, Brownlow's average earnings were $0.025 per bet. The standard deviation was approximately $1.41, indicating variation in his winnings and losses. Also, the 95% confidence interval ranged from −$0.17142 to $0.22142. Since the interval includes zero, the simulation does not provide sufficient evidence that Brownlow consistently earns or loses money under these betting conditions
 
-## 
+## Question 2
 What are the fair odds? Use manipulation of odds in the function to tune Brownlow's earnings to zero. 
 
 <!--Decide on your methods:  In this section explain the approach you will take to attack the issue --- how will you decide on a likely estimate of professor Brownlow's earnings or losses after 637 bets. Also explain how you construct a 95% confidence interval about your estimate of his winnings !-->
@@ -81,8 +81,8 @@ What are the fair odds? Use manipulation of odds in the function to tune Brownlo
 set.seed(116)
 
 urn = 1:365
-nStudents = 28
-nSimulations = 200
+nStudents = 35
+nSimulations = 10000
 
 matches = numeric(nSimulations)
 
@@ -107,9 +107,9 @@ pNoMatch
 fairPayout
 ```
 
-For Question 2, I ran 200 simulations with 28 students to find the fair odds. My results showed a 67.5% chance that two students share a birthday and a 32.5% chance that no birthdays match. The fair odds were about 2.08 to 1. This means Brownlow would need to pay $2.08 for every $1 bet when no birthdays match. This would make the bet fair because his average profit would be close to zero. 
+For a class of 35 students, I ran 10,000 simulations to find the fair odds. My results showed an 81.37% chance of at least two students sharing a birthday and an 18.63% chance of no matching birthdays. The fair odds were approximately 4.37 to 1. This means Brownlow would need to pay $4.37 for every $1 bet when no birthdays match to make the bet fair.
 
-## 
+## Question 3
 What size of class makes the 2:1 bet fair?  Use manipulation of number of Students to tune Brownlow's earnings to zero.
 
 <!--Explain and display the results of your method of coming up with the estimate of professor Brownlows betting profits!-->
@@ -118,10 +118,9 @@ What size of class makes the 2:1 bet fair?  Use manipulation of number of Studen
 set.seed(116)
 
 urn = 1:365
-nSimulations = 200
+nSimulations = 10000
 
 for(nStudents in 20:30) {
-
   results = numeric(nSimulations)
 
   for(i in 1:nSimulations) {
@@ -139,9 +138,13 @@ for(nStudents in 20:30) {
       "Average profit:", mean(results), "\n")
 }
 ```
-For Question 3, I ran 200 simulations with different class sizes to find which one would make Brownlow's bet fair at 2-to-1 odds. My results showed that 29 students had the average profit closest to zero, at -$0.005. This means Brownlow would almost break even. Based on my simulation, 29 students would make the bet approximately fair.
+
+For Question 3, I ran 10,000 simulations with different class sizes to find which one would make Brownlow's original 2-to-1 odds fair. My results showed that 28 students had the average profit closest to zero, at -$0.041 per bet. With 29 students, his average profit increased to $0.0541. This shows that as the class size increases, Brownlow has a greater chance of making money. Based on my simulation, 28 students would make the bet approximately fair.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If professor Brownlow is consistantly making or losing money how could he change his payout so that his profits center on zero?  Also discuss what size his class should be in order to have his current scheme balance at zero profit.!-->
 
+The simulations helped me understand how class size and betting odds affect Brownlow's profit. For a class of 35 students, there was an 81.37% chance of at least two students sharing a birthday. The fair odds were approximately 4.37 to 1, which is higher than Brownlow's original 2-to-1 odds. I also found that 28 students made the original bet approximately fair, while larger classes increased Brownlow's expected profit. After simulating 637 bets, his average total profit was $280.53, with a 95% confidence interval of $279.96 to $281.11 for the expected profit. Overall, these results showed how changing class size or betting odds can affect whether a bet is fair.
+
+In conclusion, Brownlow's original 2-to-1 odds are not fair for a class of 35 students because they favor him. The fair odds would be approximately 4.37 to 1, and Brownlow would be expected to make around $280.53 after 637 bets. My simulations also showed that a class size of approximately 28 students would make the original odds fair. This assignment helped me understand how Monte Carlo simulations can estimate probabilities, expected profits, and the effects of changing class sizes.
