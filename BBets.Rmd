@@ -75,10 +75,39 @@ After conducting 200 Monte Carlo simulations with 28 students, Brownlow's averag
 ## 
 What are the fair odds? Use manipulation of odds in the function to tune Brownlow's earnings to zero. 
 
-
 <!--Decide on your methods:  In this section explain the approach you will take to attack the issue --- how will you decide on a likely estimate of professor Brownlow's earnings or losses after 637 bets. Also explain how you construct a 95% confidence interval about your estimate of his winnings !-->
 
+```{r}
+set.seed(116)
 
+urn = 1:365
+nStudents = 28
+nSimulations = 200
+
+matches = numeric(nSimulations)
+
+for(i in 1:nSimulations) {
+  samplebday = sample(urn, size = nStudents, replace = TRUE)
+  l = length(unique(samplebday))
+
+  if(l < nStudents) {
+    matches[i] = 1
+  } else {
+    matches[i] = 0
+  }
+}
+
+pMatch = mean(matches)
+pNoMatch = 1 - pMatch
+
+fairPayout = pMatch / pNoMatch
+
+pMatch
+pNoMatch
+fairPayout
+```
+
+For Question 2, I ran 200 simulations with 28 students to find the fair odds. My results showed a 67.5% chance that two students share a birthday and a 32.5% chance that no birthdays match. The fair odds were about 2.08 to 1. This means Brownlow would need to pay $2.08 for every $1 bet when no birthdays match. This would make the bet fair because his average profit would be close to zero. 
 
 ## 
 What size of class makes the 2:1 bet fair?  Use manipulation of number of Students to tune Brownlow's earnings to zero.
